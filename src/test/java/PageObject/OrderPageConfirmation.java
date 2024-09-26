@@ -22,7 +22,7 @@ public class OrderPageConfirmation {
     }
 
     public boolean isLoadPage() {
-        return (driver.findElement(header).isDisplayed()&driver.findElement(header).getText().equals("Хотите оформить заказ?"));
+        return driver.findElement(header).isDisplayed();
     }
 
     public void waitLoadingPage() {

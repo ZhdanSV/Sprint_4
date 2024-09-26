@@ -1,6 +1,8 @@
 package test;
 
 import PageObject.HomePage;
+import PageObject.OrderPageForWho;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -19,9 +21,9 @@ public class ClickOrderButtons {
         HomePage objHomePage = new HomePage(driver);
         objHomePage.waitLoadingPage();
         objHomePage.clickUpOrderButton();
-        boolean isLoadPage = driver.findElement(By.className("Order_Header__BZXOb")).isDisplayed();
+        OrderPageForWho objOrderPageForWho = new OrderPageForWho(driver);
+        boolean isLoadPage = objOrderPageForWho.isLoadPage();
         Assert.assertTrue("не открывается форма заказа по нажатию верхней кнопки", isLoadPage);
-        driver.quit();
     }
 
     @Test
@@ -31,9 +33,13 @@ public class ClickOrderButtons {
         driver.get("https://qa-scooter.praktikum-services.ru/");
         HomePage objHomePage = new HomePage(driver);
         objHomePage.waitLoadingPage();
-        objHomePage.clickDownOrderButton();
-        boolean isLoadPage = driver.findElement(By.className("Order_Header__BZXOb")).isDisplayed();
+        OrderPageForWho objOrderPageForWho = new OrderPageForWho(driver);
+        boolean isLoadPage = objOrderPageForWho.isLoadPage();
         Assert.assertTrue("не открывается форма заказа по нажатию нижней кнопки", isLoadPage);
+    }
+
+    @After
+    public void tearDown() {
         driver.quit();
     }
 

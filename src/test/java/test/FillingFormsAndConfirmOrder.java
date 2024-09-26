@@ -71,25 +71,21 @@ public class FillingFormsAndConfirmOrder {
         //заполнили форму
         objOrderPageForWho.fillingPersonalInfo(name, surname, address, metroStation, phoneNumber);
         objOrderPageForWho.clickNextButton();
-        // проверили что переход выполнен
-        Assert.assertTrue("не открывается форма с информацией об аренде",
-                driver.findElement(By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']")).isDisplayed());
-        //перешли на новую страницу
         OrderPageAboutRent objAboutRent = new OrderPageAboutRent(driver);
         objAboutRent.waitLoadingPage();
+        // проверили что переход выполнен
+        Assert.assertTrue("не открывается форма с информацией об аренде", objAboutRent.isLoadPage());
         //заполнили поля
         objAboutRent.fillingAboutRentPage(deliveryDate, rentalPeriodDropDownOptions, color, commentField);
         //клик по кнопке заказать
         objAboutRent.clickOrderButtonAtRentPage();
         //проверили что переход выполнен
-        Assert.assertTrue("не открывается поп-ап с подтверждением",
-                driver.findElement(By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']")).isDisplayed());
         OrderPageConfirmation objOrderPageConfirmation = new OrderPageConfirmation(driver);
-        //дождались загрузки окна
         objOrderPageConfirmation.waitLoadingPage();
+        Assert.assertTrue("не открывается поп-ап с подтверждением", objOrderPageConfirmation.isLoadPage());
         objOrderPageConfirmation.clickYesButton();
         //проверили открылось ли окно Заказ оформлен
-        String actualText = driver.findElement(By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']")).getText();
+        String actualText = objOrderPageConfirmation.getActualText();
         Assert.assertEquals("не открылось окно Заказ оформлен", expectedText, actualText );
     }
 

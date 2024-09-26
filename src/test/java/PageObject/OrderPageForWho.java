@@ -20,7 +20,8 @@ public class OrderPageForWho {
     private final By metroStationField = By.xpath(".//input[@wfd-id='id4']");
     private final By metroStationOptions = By.xpath(".//div[@class='select-search__select']");
     private final By phoneNumberField = By.xpath(".//input[@wfd-id='id5']");
-
+    //заголовок страницы
+    private final By header = By.className("Order_Header__BZXOb");
     // кнопка "далее"
     private final By nextButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
 
@@ -29,6 +30,10 @@ public class OrderPageForWho {
         this.driver = driver;
     }
 
+    //загрузилась ли страница
+    public boolean isLoadPage() {
+        return driver.findElement(header).isDisplayed();
+    }
     //ввод Имени
     public void enterName(String name) {
         driver.findElement(nameField).sendKeys(name);

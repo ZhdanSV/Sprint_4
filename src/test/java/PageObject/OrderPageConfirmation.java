@@ -21,9 +21,17 @@ public class OrderPageConfirmation {
         this.driver = driver;
     }
 
+    public boolean isLoadPage() {
+        return (driver.findElement(header).isDisplayed()&driver.findElement(header).getText().equals("Хотите оформить заказ?"));
+    }
+
     public void waitLoadingPage() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOf(driver.findElement(header)));
+    }
+
+    public String getActualText() {
+        return driver.findElement(header).getText();
     }
 
     public void clickYesButton() {

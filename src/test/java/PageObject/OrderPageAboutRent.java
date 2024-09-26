@@ -28,6 +28,12 @@ public class OrderPageAboutRent {
     public OrderPageAboutRent(WebDriver driver) {
         this.driver = driver;
     }
+
+    //загрузилась ли страница
+    public boolean isLoadPage() {
+        return driver.findElement(deliveryDate).isDisplayed();
+    }
+
     //ввод даты доставки
     public void enterDeliveryDate(String date) {
         driver.findElement(deliveryDate).click();
